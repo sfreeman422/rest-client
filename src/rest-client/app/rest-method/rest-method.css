@@ -1,0 +1,22 @@
+.rest-method {
+  width: fit-content;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.rest-method-get {
+  color: rgb(164, 255, 164);
+}
+
+.rest-method-put {
+  color: rgb(247, 245, 140);
+}
+
+.rest-method-post {
+  color: rgb(135, 202, 233);
+}
+
+.rest-method-delete {
+  color: rgb(230, 145, 111);
+}

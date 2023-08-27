@@ -19,9 +19,18 @@
   padding: 1rem;
 }
 
+.configuration {
+  grid-column: 4 / 12;
+  grid-row: 2 / 10;
+  background-color: rgb(104, 103, 103);
+  margin-top: 1rem;
+  margin-left: 1rem;
+  padding: 1rem;
+}
+
 .output {
   grid-column: 4 / 12;
-  grid-row: 2 / 20;
+  grid-row: 10 / 20;
   background-color: rgb(104, 103, 103);
   margin-top: 1rem;
   margin-left: 1rem;

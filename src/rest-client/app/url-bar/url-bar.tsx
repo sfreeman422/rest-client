@@ -12,9 +12,6 @@ import "./url-bar.css";
 export const UrlBar = () => {
   const [url, setUrl] = useState("");
   const dispatch = useAppDispatch();
-  const history: RequestState[] = useAppSelector((state) =>
-    selectHistory(state.appState)
-  );
 
   const sendRequest = () => {
     const requestState: RequestState = {
@@ -27,7 +24,6 @@ export const UrlBar = () => {
       loading: false,
     };
     if (url) {
-      console.log(requestState);
       dispatch(addModifyRequestState(requestState));
     }
   };
@@ -36,7 +32,6 @@ export const UrlBar = () => {
     setUrl(event.target.value);
   };
 
-  console.log(history);
   return (
     <div className="url-bar-container">
       <RestMethod method={RestMethodEnum.GET} />

@@ -1,5 +1,9 @@
+import "./app.css";
+
 export const App = () => (
-  <div>
-    <h1>REST Client</h1>
+  <div className="container">
+    <div className="side-nav">Side-nav</div>
+    <div className="url-bar">Bar</div>
+    <div className="output">Output</div>
   </div>
 );

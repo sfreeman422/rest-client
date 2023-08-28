@@ -5,6 +5,7 @@ interface AppState {
 }
 
 export interface RequestState {
+  id: string;
   url: string;
   method: RestMethodEnum;
   headers: string;
@@ -22,36 +23,16 @@ export const appStateSlice = createSlice({
   name: "appState",
   initialState: initialAppState,
   reducers: {
-    addModifyRequestState: (
-      state: AppState,
-      action: PayloadAction<RequestState>
-    ) => {
-      console.log("action.payload", action.payload);
-      const { url, method, headers, body, response, error, loading } =
-        action.payload;
-      const index = state.history.findIndex((request) => request.url === url);
-      if (index === -1) {
-        state.history.push(action.payload);
-      } else {
-        state.history[index] = {
-          url,
-          method,
-          headers,
-          body,
-          response,
-          error,
-          loading,
-        };
-      }
+    addHistory: (state: AppState, action: PayloadAction<RequestState>) => {
+      state.history.push(action.payload);
     },
   },
 });
 
-export const { addModifyRequestState } = appStateSlice.actions;
+export const { addHistory } = appStateSlice.actions;
 
 export const selectHistory = (state: AppState) => {
-  console.log(state);
-  return state.history;
+  return state.history?.map((x) => x).reverse();
 };
 
 export default appStateSlice.reducer;

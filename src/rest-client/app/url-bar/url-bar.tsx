@@ -1,20 +1,18 @@
 import { useState } from "react";
 import { RestMethod, RestMethodEnum } from "../rest-method/rest-method";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import {
-  addModifyRequestState,
-  selectHistory,
-  RequestState,
-} from "../../store/state";
+import { useAppDispatch } from "../../store/hooks";
+import { addHistory, RequestState } from "../../store/state";
+import { v4 as uuidv4 } from "uuid";
 
 import "./url-bar.css";
 
-export const UrlBar = () => {
+export const UrlBar = (): React.ReactElement => {
   const [url, setUrl] = useState("");
   const dispatch = useAppDispatch();
 
   const sendRequest = () => {
     const requestState: RequestState = {
+      id: uuidv4(),
       url: url,
       method: RestMethodEnum.GET,
       body: "",
@@ -24,7 +22,7 @@ export const UrlBar = () => {
       loading: false,
     };
     if (url) {
-      dispatch(addModifyRequestState(requestState));
+      dispatch(addHistory(requestState));
     }
   };
 

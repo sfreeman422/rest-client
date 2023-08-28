@@ -4,7 +4,7 @@ import { RestMethod } from "../rest-method/rest-method";
 import "./history.css";
 
 export const History = () => {
-  const history: RequestState[] = useAppSelector((state) =>
+  const history: Record<string, RequestState[]> = useAppSelector((state) =>
     selectHistory(state.appState)
   );
 
@@ -12,12 +12,20 @@ export const History = () => {
     <div className="history-container">
       <span>History</span>
       <div className="history-list">
-        {history.map((requestState, i) => (
-          <div className="history-item" key={`history-item-${i}`}>
-            <RestMethod method={requestState.method} />
-            <div>{requestState.url}</div>
-          </div>
-        ))}
+        {Object.keys(history).map((historyDate, i) => {
+          return (
+            <div key={`history-date-${i}`} className="history-date-item">
+              {historyDate}
+              {history[historyDate].map((requestState, i) => (
+                <div className="history-item" key={`history-item-${i}`}>
+                  <RestMethod method={requestState.method} />
+                  <div>{requestState.url}</div>
+                  <div>{requestState.date.toLocaleTimeString()}</div>
+                </div>
+              ))}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

@@ -14,6 +14,7 @@ export const UrlBar = (): React.ReactElement => {
     const requestState: RequestState = {
       id: uuidv4(),
       url: url,
+      date: new Date(),
       method: RestMethodEnum.GET,
       body: "",
       headers: "",

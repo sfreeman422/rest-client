@@ -7,6 +7,7 @@ interface AppState {
 export interface RequestState {
   id: string;
   url: string;
+  date: Date;
   method: RestMethodEnum;
   headers: string;
   body: string;
@@ -31,8 +32,18 @@ export const appStateSlice = createSlice({
 
 export const { addHistory } = appStateSlice.actions;
 
-export const selectHistory = (state: AppState) => {
-  return state.history?.map((x) => x).reverse();
+export const selectHistory = (
+  state: AppState
+): Record<string, RequestState[]> => {
+  const historyObj: Record<string, RequestState[]> = {};
+  state.history?.forEach((x) => {
+    if (!historyObj[x.date.toLocaleDateString()]) {
+      historyObj[x.date.toLocaleDateString()] = [x];
+    } else {
+      historyObj[x.date.toLocaleDateString()].unshift(x);
+    }
+  });
+  return historyObj;
 };
 
 export default appStateSlice.reducer;

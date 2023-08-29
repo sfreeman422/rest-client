@@ -13,10 +13,15 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .history-list {
   overflow: scroll;
   overflow-x: hidden;
   height: 98%;
+}
+
+.url {
+  max-width: 33%;
 }

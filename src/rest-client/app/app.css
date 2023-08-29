@@ -5,10 +5,19 @@
   flex-grow: 1;
 }
 
-.side-nav {
+.collection {
   grid-column: 1 / 5;
-  grid-row: 1 / 25;
+  grid-row: 1 / 13;
   background-color: rgb(104, 103, 103);
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+.history {
+  grid-column: 1 / 5;
+  grid-row: 13 / 25;
+  background-color: rgb(104, 103, 103);
+  margin-top: 1rem;
   padding: 1rem;
   border-radius: 5px;
 }

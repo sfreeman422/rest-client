@@ -19,7 +19,7 @@ export const History = () => {
               {history[historyDate].map((requestState, i) => (
                 <div className="history-item" key={`history-item-${i}`}>
                   <RestMethod method={requestState.method} />
-                  <div>{requestState.url}</div>
+                  <div className="url">{requestState.url}</div>
                   <div>{requestState.date.toLocaleTimeString()}</div>
                 </div>
               ))}

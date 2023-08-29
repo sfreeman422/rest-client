@@ -8,7 +8,8 @@ export const App = () => {
   return (
     <Provider store={store}>
       <div className="container">
-        <div className="side-nav">
+        <div className="collection">Collection</div>
+        <div className="history">
           <History />
         </div>
         <div className="url-bar">

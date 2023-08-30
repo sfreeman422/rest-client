@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { RestMethodEnum } from "../app/rest-method/rest-method";
+import { removePlaceholder } from "./util";
 interface AppState {
   history: RequestState[];
   collection: CollectionState[];
@@ -34,19 +35,21 @@ export const appStateSlice = createSlice({
       state.history.push(action.payload);
     },
     addCollection: (state: AppState, action: PayloadAction<RequestState>) => {
-      const { origin, pathname, search } = new URL(action.payload.url);
-      console.log(origin);
-      console.log(pathname);
-      console.log(search);
+      const { origin } = new URL(action.payload.url);
       const existingRequest = state.collection.find((x) => x[origin]);
-      const existingRequestHasUrl = existingRequest?.[origin].find(
-        (x) => x.url === action.payload.url
+      console.log("modifiedUrl", removePlaceholder(action.payload.url));
+      const modifiedPayload = {
+        ...action.payload,
+        url: removePlaceholder(action.payload.url),
+      };
+      const hasOrigin = existingRequest?.[origin].find(
+        (x) => x.url === modifiedPayload.url
       );
-      if (existingRequest && !existingRequestHasUrl) {
-        existingRequest[origin].push(action.payload);
+      if (existingRequest && !hasOrigin) {
+        existingRequest[origin].push(modifiedPayload);
       } else if (!existingRequest) {
         const collection: CollectionState = {
-          [origin]: [action.payload],
+          [origin]: [modifiedPayload],
         };
         state.collection.push(collection);
       }

@@ -3,3 +3,7 @@ export const removePlaceholder = (url: string): string => {
   console.log(regex.test(url));
   return url.replaceAll(regex, "{{}}");
 };
+
+export const stripPlaceHolderValues = (url: string): string => {
+  return url.replaceAll("{{", "").replaceAll("}}", "");
+};

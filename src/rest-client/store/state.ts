@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { RestMethodEnum } from "../app/rest-method/rest-method";
-import { removePlaceholder } from "./util";
+import { removePlaceholder, stripPlaceHolderValues } from "./util";
 interface AppState {
   history: RequestState[];
   collection: CollectionState[];
@@ -32,7 +32,10 @@ export const appStateSlice = createSlice({
   initialState: initialAppState,
   reducers: {
     addHistory: (state: AppState, action: PayloadAction<RequestState>) => {
-      state.history.push(action.payload);
+      state.history.push({
+        ...action.payload,
+        url: stripPlaceHolderValues(action.payload.url),
+      });
     },
     addCollection: (state: AppState, action: PayloadAction<RequestState>) => {
       const { origin } = new URL(action.payload.url);

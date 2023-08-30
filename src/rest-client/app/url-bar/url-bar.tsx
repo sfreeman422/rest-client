@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, KeyboardEvent } from "react";
 import { RestMethod, RestMethodEnum } from "../rest-method/rest-method";
 import { useAppDispatch } from "../../store/hooks";
 import { addCollection, addHistory, RequestState } from "../../store/state";
@@ -32,6 +32,13 @@ export const UrlBar = (): React.ReactElement => {
     setUrl(event.target.value);
   };
 
+  const handleEnter = (event: KeyboardEvent<HTMLInputElement>) => {
+    console.log(event);
+    if (event.key === "Enter") {
+      sendRequest();
+    }
+  };
+
   return (
     <div className="url-bar-container">
       <RestMethod method={RestMethodEnum.GET} />
@@ -40,6 +47,7 @@ export const UrlBar = (): React.ReactElement => {
         type="text"
         className="input-bar"
         onChange={handleChange}
+        onKeyDown={handleEnter}
       />
       <button className="send-button" onClick={() => sendRequest()}>
         Send

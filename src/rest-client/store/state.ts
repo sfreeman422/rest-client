@@ -34,7 +34,7 @@ export const appStateSlice = createSlice({
     addHistory: (state: AppState, action: PayloadAction<RequestState>) => {
       state.history.push({
         ...action.payload,
-        url: stripPlaceHolderValues(action.payload.url),
+        url: stripPlaceHolderValues(action.payload.url), // May want to do this only on actual network request.
       });
     },
     addCollection: (state: AppState, action: PayloadAction<RequestState>) => {

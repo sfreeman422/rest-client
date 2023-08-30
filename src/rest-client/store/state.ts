@@ -2,6 +2,11 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { RestMethodEnum } from "../app/rest-method/rest-method";
 interface AppState {
   history: RequestState[];
+  collection: CollectionState[];
+}
+
+export interface CollectionState {
+  [cname: string]: RequestState[];
 }
 
 export interface RequestState {
@@ -18,6 +23,7 @@ export interface RequestState {
 
 const initialAppState: AppState = {
   history: [],
+  collection: [],
 };
 
 export const appStateSlice = createSlice({
@@ -27,10 +33,25 @@ export const appStateSlice = createSlice({
     addHistory: (state: AppState, action: PayloadAction<RequestState>) => {
       state.history.push(action.payload);
     },
+    addCollection: (state: AppState, action: PayloadAction<RequestState>) => {
+      const { origin, pathname, search } = new URL(action.payload.url);
+      console.log(origin);
+      console.log(pathname);
+      console.log(search);
+      const existingRequest = state.collection.find((x) => x[origin]);
+      if (existingRequest) {
+        existingRequest[origin].push(action.payload);
+      } else {
+        const collection: CollectionState = {
+          [origin]: [action.payload],
+        };
+        state.collection.push(collection);
+      }
+    },
   },
 });
 
-export const { addHistory } = appStateSlice.actions;
+export const { addHistory, addCollection } = appStateSlice.actions;
 
 export const selectHistory = (
   state: AppState
@@ -44,6 +65,18 @@ export const selectHistory = (
     }
   });
   return historyObj;
+};
+
+export const selectCollections = (
+  state: AppState
+): Record<string, RequestState[]> => {
+  const collectionObj: Record<string, RequestState[]> = {};
+  state.collection?.forEach((x) => {
+    const origin = Object.keys(x)[0];
+    collectionObj[origin] = x[origin];
+  });
+  console.log(collectionObj);
+  return collectionObj;
 };
 
 export default appStateSlice.reducer;

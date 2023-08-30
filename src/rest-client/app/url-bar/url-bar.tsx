@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { RestMethod, RestMethodEnum } from "../rest-method/rest-method";
 import { useAppDispatch } from "../../store/hooks";
-import { addHistory, RequestState } from "../../store/state";
+import { addCollection, addHistory, RequestState } from "../../store/state";
 import { v4 as uuidv4 } from "uuid";
 
 import "./url-bar.css";
@@ -24,6 +24,7 @@ export const UrlBar = (): React.ReactElement => {
     };
     if (url) {
       dispatch(addHistory(requestState));
+      dispatch(addCollection(requestState));
     }
   };
 

@@ -9,7 +9,7 @@
   grid-column: 1 / 5;
   grid-row: 1 / 13;
   background-color: rgb(104, 103, 103);
-  padding: 1rem;
+  padding: 0.25rem;
   border-radius: 5px;
 }
 
@@ -17,8 +17,8 @@
   grid-column: 1 / 5;
   grid-row: 13 / 25;
   background-color: rgb(104, 103, 103);
-  margin-top: 1rem;
-  padding: 1rem;
+  margin-top: 0.5rem;
+  padding: 0.25rem;
   border-radius: 5px;
 }
 
@@ -26,8 +26,8 @@
   grid-column: 5 / 13;
   grid-row: 1;
   background-color: rgb(104, 103, 103);
-  margin-left: 1rem;
-  padding: 1rem;
+  margin-left: 0.5rem;
+  padding: 0.25rem;
   display: flex;
   align-items: center;
   border-radius: 5px;
@@ -37,9 +37,9 @@
   grid-column: 5 / 13;
   grid-row: 2 / 13;
   background-color: rgb(104, 103, 103);
-  margin-top: 1rem;
-  margin-left: 1rem;
-  padding: 1rem;
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+  padding: 0.25rem;
   border-radius: 5px;
 }
 
@@ -47,8 +47,8 @@
   grid-column: 5 / 13;
   grid-row: 13 / 25;
   background-color: rgb(104, 103, 103);
-  margin-top: 1rem;
-  margin-left: 1rem;
-  padding: 1rem;
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+  padding: 0.25rem;
   border-radius: 5px;
 }

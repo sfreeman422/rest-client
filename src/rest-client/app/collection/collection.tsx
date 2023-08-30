@@ -1,5 +1,7 @@
 import { useAppSelector } from "../../store/hooks";
 import { RequestState, selectCollections } from "../../store/state";
+import { RestMethod } from "../rest-method/rest-method";
+import "./collection.css";
 
 export const Collection = () => {
   const collections: Record<string, RequestState[]> = useAppSelector((state) =>
@@ -12,12 +14,15 @@ export const Collection = () => {
       <div className="collection-list">
         {Object.keys(collections).map((collectionOrigin, i) => {
           return (
-            <div key={`collection-date-${i}`} className="collection-date-item">
+            <div
+              key={`collection-origin-${i}`}
+              className="collection-origin-item"
+            >
               <h3>{collectionOrigin}</h3>
               {collections[collectionOrigin].map((requestState, i) => (
                 <div className="collection-item" key={`collection-item-${i}`}>
-                  <div className="url">{requestState.url}</div>
-                  <div>{requestState.date.toLocaleTimeString()}</div>
+                  <RestMethod method={requestState.method} />
+                  <div>{requestState.url.replace(collectionOrigin, "")}</div>
                 </div>
               ))}
             </div>

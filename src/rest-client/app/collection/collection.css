@@ -3,25 +3,22 @@
   resize: horizontal;
 }
 
-.collection-date-item {
-  padding-top: 1rem;
+.collection-origin-item {
+  padding-top: 0.25rem;
 }
 
 .collection-item {
-  padding: 0.5rem 0rem;
+  padding-right: 0.25rem;
   border-bottom: 1px solid #ccc;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  word-wrap: break-word;
 }
 
 .collection-list {
   overflow: scroll;
   overflow-x: hidden;
   height: 98%;
-}
-
-.url {
-  max-width: 33%;
 }

@@ -4,11 +4,11 @@
 }
 
 .history-date-item {
-  padding-top: 1rem;
+  padding-top: 0.25rem;
 }
 
 .history-item {
-  padding: 0.5rem 0rem;
+  padding-right: 0.25rem;
   border-bottom: 1px solid #ccc;
   cursor: pointer;
   display: flex;
@@ -20,8 +20,4 @@
   overflow: scroll;
   overflow-x: hidden;
   height: 98%;
-}
-
-.url {
-  max-width: 33%;
 }

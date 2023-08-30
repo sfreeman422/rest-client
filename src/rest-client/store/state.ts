@@ -39,9 +39,12 @@ export const appStateSlice = createSlice({
       console.log(pathname);
       console.log(search);
       const existingRequest = state.collection.find((x) => x[origin]);
-      if (existingRequest) {
+      const existingRequestHasUrl = existingRequest?.[origin].find(
+        (x) => x.url === action.payload.url
+      );
+      if (existingRequest && !existingRequestHasUrl) {
         existingRequest[origin].push(action.payload);
-      } else {
+      } else if (!existingRequest) {
         const collection: CollectionState = {
           [origin]: [action.payload],
         };

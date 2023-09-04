@@ -29,7 +29,15 @@ export const UrlBar = (): React.ReactElement => {
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUrl(event.target.value);
+    const hasProtocol =
+      event.target.value.startsWith("https://") ||
+      event.target.value.startsWith("http://");
+    if (hasProtocol) {
+      setUrl(event.target.value);
+    } else {
+      const urlWithDefaultProtocol = `http://${event.target.value}`;
+      setUrl(urlWithDefaultProtocol);
+    }
   };
 
   const handleEnter = (event: KeyboardEvent<HTMLInputElement>) => {

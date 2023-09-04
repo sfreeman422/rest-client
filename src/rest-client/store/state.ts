@@ -39,6 +39,7 @@ export const appStateSlice = createSlice({
     },
     addCollection: (state: AppState, action: PayloadAction<RequestState>) => {
       const { origin } = new URL(action.payload.url);
+      console.log(new URL(action.payload.url))
       const existingRequest = state.collection.find((x) => x[origin]);
       console.log("modifiedUrl", removePlaceholder(action.payload.url));
       const modifiedPayload = {

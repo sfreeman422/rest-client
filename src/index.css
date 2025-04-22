@@ -1,0 +1,18 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  font-size: 12px;
+  margin: auto;
+  max-width: 100%;
+  min-height: calc(100vh - 4rem);
+  max-height: calc(100vh - 4rem);
+  padding: 2rem;
+  background-color: #3b3b3b;
+  color: rgb(235, 235, 235);
+}
+
+#app {
+  display: flex;
+  min-height: calc(100vh - 4rem);
+  max-height: calc(100vh - 4rem);
+}

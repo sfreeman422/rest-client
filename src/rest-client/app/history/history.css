@@ -1,0 +1,23 @@
+.history-container {
+  height: 100%;
+  resize: horizontal;
+}
+
+.history-date-item {
+  padding-top: 0.25rem;
+}
+
+.history-item {
+  padding-right: 0.25rem;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.history-list {
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 98%;
+}

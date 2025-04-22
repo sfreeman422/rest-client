@@ -1,0 +1,14 @@
+.input-bar {
+  width: 90%;
+  background-color: #a0a0a0;
+}
+.send-button {
+  background-color: #88b9e0;
+  padding: 0.25rem;
+  margin-left: 0.25rem;
+}
+
+.url-bar-container {
+  display: flex;
+  flex-grow: 1;
+}

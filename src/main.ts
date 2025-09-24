@@ -13,6 +13,12 @@ const createWindow = () => {
     height: 1080,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
+      // Disable webSecurity so the renderer process won't enforce CORS and
+      // will allow the app to make cross-origin requests. This makes the
+      // app more flexible for development and desktop usage where the app
+      // controls its environment. Be cautious enabling this in contexts
+      // where untrusted content might be loaded.
+      webSecurity: false,
     },
   });
 

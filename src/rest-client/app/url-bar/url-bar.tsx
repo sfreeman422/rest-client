@@ -1,10 +1,16 @@
 import { useState, KeyboardEvent } from "react";
 import { RestMethod, RestMethodEnum } from "../rest-method/rest-method";
 import { useAppDispatch } from "../../store/hooks";
-import { addCollection, addHistory, RequestState } from "../../store/state";
+import {
+  addCollection,
+  addCurrentOutput,
+  addHistory,
+  RequestState,
+} from "../../store/state";
 import { v4 as uuidv4 } from "uuid";
 
 import "./url-bar.css";
+import axios from "axios";
 
 export const UrlBar = (): React.ReactElement => {
   const [url, setUrl] = useState("");
@@ -16,16 +22,33 @@ export const UrlBar = (): React.ReactElement => {
       url: url,
       date: new Date(),
       method: RestMethodEnum.GET,
-      body: "",
-      headers: "",
-      response: "",
-      error: "",
-      loading: false,
     };
-    if (url) {
-      dispatch(addHistory(requestState));
-      dispatch(addCollection(requestState));
+
+    // Rewrite moodly origin to go through the Vite /api proxy in dev so CORS
+    // isn't an issue. Otherwise use the full URL as entered.
+    let requestUrl = requestState.url || "";
+    try {
+      const parsed = new URL(requestUrl);
+      if (parsed.origin === "https://api.moodly.me") {
+        requestUrl = `/api${parsed.pathname}${parsed.search}`;
+      }
+    } catch (e) {
+      // ignore invalid URL; axios will report an error
     }
+
+    axios({ method: requestState.method, url: requestUrl })
+      .then((response) => {
+        console.log(response);
+        requestState.response = response.data;
+        if (url) {
+          dispatch(addHistory(requestState));
+          dispatch(addCollection(requestState));
+          dispatch(addCurrentOutput(requestState));
+        }
+      })
+      .catch((err) => {
+        console.error("Request failed", err);
+      });
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

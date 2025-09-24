@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { store } from "../store/store";
 import { History } from "../app/history/history";
 import { Collection } from "./collection/collection";
+import { Output } from "./output/output";
 
 export const App = () => {
   return (
@@ -19,7 +20,9 @@ export const App = () => {
           <UrlBar />
         </div>
         <div className="configuration">Configuration</div>
-        <div className="output">Output</div>
+        <div className="output">
+          <Output />
+        </div>
       </div>
     </Provider>
   );

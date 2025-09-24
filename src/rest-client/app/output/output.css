@@ -1,0 +1,7 @@
+.output-container {
+  text-wrap: pretty;
+  height: 100%;
+  overflow: scroll;
+  width: 100%;
+  background-color: #343a40;
+}

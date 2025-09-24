@@ -1,30 +1,31 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { RestMethodEnum } from "../app/rest-method/rest-method";
+// ...existing code... (RestMethodEnum import removed because it's unused here)
 import { removePlaceholder, stripPlaceHolderValues } from "./util";
+import { AxiosRequestConfig } from "axios";
+import { RestMethodEnum } from "../app/rest-method/rest-method";
+import { stat } from "fs";
+
+export interface RequestState extends AxiosRequestConfig {
+  id: string;
+  date: Date;
+  method: RestMethodEnum;
+  mode?: string;
+  response?: unknown;
+}
+
 interface AppState {
   history: RequestState[];
   collection: CollectionState[];
+  currentResponse?: unknown;
 }
 
 export interface CollectionState {
   [cname: string]: RequestState[];
 }
-
-export interface RequestState {
-  id: string;
-  url: string;
-  date: Date;
-  method: RestMethodEnum;
-  headers: string;
-  body: string;
-  response: string;
-  error: string;
-  loading: boolean;
-}
-
 const initialAppState: AppState = {
   history: [],
   collection: [],
+  currentResponse: undefined,
 };
 
 export const appStateSlice = createSlice({
@@ -39,7 +40,7 @@ export const appStateSlice = createSlice({
     },
     addCollection: (state: AppState, action: PayloadAction<RequestState>) => {
       const { origin } = new URL(action.payload.url);
-      console.log(new URL(action.payload.url))
+      console.log(new URL(action.payload.url));
       const existingRequest = state.collection.find((x) => x[origin]);
       console.log("modifiedUrl", removePlaceholder(action.payload.url));
       const modifiedPayload = {
@@ -58,10 +59,18 @@ export const appStateSlice = createSlice({
         state.collection.push(collection);
       }
     },
+    addCurrentOutput: (
+      state: AppState,
+      action: PayloadAction<RequestState>
+    ) => {
+      const { response } = action.payload;
+      state.currentResponse = response;
+    },
   },
 });
 
-export const { addHistory, addCollection } = appStateSlice.actions;
+export const { addHistory, addCollection, addCurrentOutput } =
+  appStateSlice.actions;
 
 export const selectHistory = (
   state: AppState
@@ -87,6 +96,10 @@ export const selectCollections = (
   });
   console.log(collectionObj);
   return collectionObj;
+};
+
+export const selectCurrentOutput = (state: AppState): unknown => {
+  return state.currentResponse;
 };
 
 export default appStateSlice.reducer;

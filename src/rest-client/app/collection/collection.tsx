@@ -10,7 +10,7 @@ export const Collection = () => {
 
   return (
     <div className="collection-container">
-      <span>Collection</span>
+      <h2>Collection</h2>
       <div className="collection-list">
         {Object.keys(collections).map((collectionOrigin, i) => {
           return (

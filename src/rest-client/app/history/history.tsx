@@ -10,7 +10,7 @@ export const History = () => {
 
   return (
     <div className="history-container">
-      <span>History</span>
+      <h2>History</h2>
       <div className="history-list">
         {Object.keys(history).map((historyDate, i) => {
           return (

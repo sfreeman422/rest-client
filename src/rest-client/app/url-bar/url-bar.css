@@ -1,11 +1,19 @@
 .input-bar {
   width: 90%;
-  background-color: #a0a0a0;
+  background-color: #adb5bd;
 }
+
+.input-bar:focus {
+  background-color: #ced4da;
+  outline: none;
+}
+
 .send-button {
-  background-color: #88b9e0;
+  background-color: #ced4da;
   padding: 0.25rem;
   margin-left: 0.25rem;
+  color: #212529;
+  border-radius: 0.5rem;
 }
 
 .url-bar-container {

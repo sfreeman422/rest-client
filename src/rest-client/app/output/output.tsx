@@ -11,7 +11,7 @@ export const Output = (): React.ReactElement => {
 
   return (
     <div className="output-container">
-      <span>Response</span>
+      <h2>Response</h2>
       {!!currentOutput && typeof currentOutput === "object" && (
         <JsonView
           value={currentOutput}
@@ -22,6 +22,7 @@ export const Output = (): React.ReactElement => {
       {!!currentOutput && typeof currentOutput !== "object" && (
         <pre>{String(currentOutput)}</pre>
       )}
+      {!currentOutput && <h2>Make a request.</h2>}
     </div>
   );
 };
